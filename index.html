@@ -5,29 +5,42 @@
     <title>Psychic Game</title>
 </head>
 <body>
-    <div class="container">
-    <h1>The Psychic Alphabet</h1><br>
-    <h3>Guess a letter!</h3><br>
-    <div id="win">
-    <p>Wins: </p><br></div>
-    <div id="loss">
-    <p>Losses: </p><br></div>
-    <div id="guesses">
-    <p>Your Guesses:</p><br></div>
-    <div id="left">
-    <p>Guesses Left:</p></div>
-    </div>
+    <div id="game">
+        <h1>The Pyschic Game</h1>
+        <h3>Guess what letter I think of</h3>
+        <p id="guesses"></p>
+        <p id="guessesLeft"></p>
+        <p id="wins"></p>
+        <p id="losses"></p>
     <script>
-        document.ready();
     var wins = 0;
     var losses = 0;
-    var guesses = [0];
     var guessLeft = 9;
     var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"];
+    
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    console.log(computerGuess);
+
+    document.onkeyup = function (event) {
     for (var x = 0; x < guessLeft; x++) {
-        var computerGuess = computerChoices[Math.floor(Math.random() * computerGuesses.length)];
-        
+        var userGuess = event.key;
+        for(var letterAdder = 0; letterAdder < guessLeft; letterAdder++) {
+            document.getElementById("guesses").innerHTML = "<p> Your Guesses: " + event.key + ", ";
+            }
+        document.getElementById("guessesLeft").innerHTML = "<p> Guesses Left: " + guessLeft + "</p>"
+        if (userGuess === computerGuess) {
+            alert("You guessed Correctly!");
+            wins++
+            }
+        else {
+            guessLeft--;
+            if(guessLeft === 0) {
+                alert("You lose...");
+                losses++;
+                }
+            }
+        }
     }
-    </script>
+</script>
 </body>
 </html>
