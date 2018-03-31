@@ -8,10 +8,12 @@
     <div id="game">
         <h1>The Pyschic Game</h1>
         <h3>Guess what letter I think of</h3>
-        <p id="guesses"></p>
-        <p id="guessesLeft"></p>
-        <p id="wins"></p>
-        <p id="losses"></p>
+        <p id="guesses">Your Guesses: </p>
+        <div class="info">
+        <p id="guessesLeft">Guesses Left: </p>
+        <p id="wins">Wins: </p>
+        <p id="losses">Losses: </p>
+        </div>
     <script>
     var wins = 0;
     var losses = 0;
@@ -21,25 +23,17 @@
     var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
     console.log(computerGuess);
 
-    document.onkeyup = function (event) {
-    for (var x = 0; x < guessLeft; x++) {
-        var userGuess = event.key;
-        for(var letterAdder = 0; letterAdder < guessLeft; letterAdder++) {
-            document.getElementById("guesses").innerHTML = "<p> Your Guesses: " + event.key + ", ";
-            }
-        document.getElementById("guessesLeft").innerHTML = "<p> Guesses Left: " + guessLeft + "</p>"
-        if (userGuess === computerGuess) {
-            alert("You guessed Correctly!");
-            wins++
-            }
-        else {
-            guessLeft--;
-            if(guessLeft === 0) {
-                alert("You lose...");
-                losses++;
-                }
-            }
+    var newLetterDiv = $("#guesses");
+
+    document.onkeyup = function press(event) {
+        for(var count = 0; count<1; count++) {
+        var letterDiv = $("<p>" + event.key + "</p>");
+        newLetterDiv.append(letterDiv);
+        guessLeft = guessLeft - 1;
+        for(var guessCount = 0; guessCount<guessLeft; guessCount++) {
+            document.getElementById("guessesLeft").innerHTML = "<p> Guesses Left: " + guessLeft + "</p";
         }
+    }
     }
 </script>
 </body>
